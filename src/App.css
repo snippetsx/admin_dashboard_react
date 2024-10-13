@@ -1,0 +1,45 @@
+.board-row {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 210px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.square {
+  background-color: #6b3b3b;
+  border: 1px solid #999;
+  float: left;
+  font-size: 23px;
+  font-weight: bold;
+  line-height: 10px;
+  height: 64px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.square:hover {
+  background-color: #00a2ff;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+  min-width: 180px;
+}
