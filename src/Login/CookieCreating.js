@@ -3,9 +3,9 @@ export const createAuthCookie = (token) => {
   expirationDate.setDate(expirationDate.getDate() + 7); // Set expiration to 7 days from now
 
   const cookieValue = encodeURIComponent(token);
-  const cookieString = `authToken=${cookieValue}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict; Secure; domain=admin.lcsa.ru`;
+  document.cookie = `authToken=${cookieValue}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict; Secure`;
 
-  document.cookie = cookieString;
+  console.log(document.cookie);
 };
 
 export const checkAuthCookie = () => {
@@ -20,7 +20,12 @@ export const checkAuthCookie = () => {
   const decodedToken = decodeURIComponent(token);
 
   // Check if the cookie has expired
-  const expirationDate = new Date(document.cookie.match(/expires=([^;]+)/)[1]);
+  const expirationMatch = document.cookie.match(/expires=([^;]+)/);
+  if (!expirationMatch) {
+    return null; // Expiration date not found
+  }
+
+  const expirationDate = new Date(expirationMatch[1]);
   if (expirationDate < new Date()) {
     return null; // Cookie has expired
   }

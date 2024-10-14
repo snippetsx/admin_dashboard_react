@@ -1,13 +1,8 @@
-import LoginPage from './Login/LoginPage';
 import React, { useState, useEffect } from 'react';
-import { 
-  Typography, 
-  Box,
-} from '@mui/material';
 import Login from './Login/LoginPage';
-
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { checkAuthCookie } from './Login/CookieCreating';
+import Dashboard from './Dashboard/DashboardMain'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,7 +21,7 @@ function App() {
         />
         <Route 
           path="/dashboard" 
-          element={isAuthenticated ? <Login /> : <Navigate to="/login" />} 
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
         />
         <Route 
           path="/" 

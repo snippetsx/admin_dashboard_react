@@ -8,6 +8,10 @@ import {
 } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
+import './LoginPage.css'
+import { useNavigate } from 'react-router-dom';
+import { createAuthCookie } from './CookieCreating';
+
 
 const LoginPageWithTheme = () => (
   <ThemeProvider theme={theme}>
@@ -15,17 +19,26 @@ const LoginPageWithTheme = () => (
   </ThemeProvider>
 );
 
-let isPasswordIncorrect = null;
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
+  const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you would typically handle the login logic
-    console.log('Login attempt with:', email, password);
-    isPasswordIncorrect = true;
+    console.log('Login attempt with:', username, password);
+    if (username === 'snippetsx' && password === '2371') 
+    {
+      createAuthCookie(username);
+      navigate('/dashboard');
+    }
+    else
+    {
+      setMsg(true)
+    }
+    
   };
 
   return (
@@ -62,13 +75,13 @@ const LoginPage = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setusername(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -81,11 +94,9 @@ const LoginPage = () => {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              error={isPasswordIncorrect}
-              helperText={isPasswordIncorrect ? "Incorrect password" : ""}
-              InputProps={{
-                className: isPasswordIncorrect ? 'shake-animation' : '',
-              }}
+              error={msg}
+              helperText={msg ? "Incorrect password" : ""}
+              className={msg ? 'shake-animation' : ''}
             />
             
             <Button
