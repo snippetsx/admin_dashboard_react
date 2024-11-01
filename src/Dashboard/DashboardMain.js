@@ -9,7 +9,8 @@ import {
   ListItemText,
   List,
   Drawer,
-  IconButton
+  IconButton,
+  Divider
 } from '@mui/material';
 import ListItemIcon from '@mui/icons-material/List'
 import PeopleIcon from'@mui/icons-material/People'

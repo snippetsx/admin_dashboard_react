@@ -1,35 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Login from './Login/LoginPage';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { checkAuthCookie } from './Login/CookieCreating';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Preferences from './Preferences/Preferences'
 import Dashboard from './Dashboard/DashboardMain'
+import './App.css'
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState();
 
-  useEffect(() => {
-    const token = checkAuthCookie();
-    setIsAuthenticated(!!token);
-  }, []);
+  if(!token){
+    return <Login setToken={setToken} />
+  }
 
   return (
     <Router>
       <Routes>
-        <Route 
-          path="/login" 
-          element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />} 
-        />
-        <Route 
-          path="/dashboard" 
-          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
-        />
-        <Route 
-          path="/" 
-          element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} 
-        />
+        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/preferences" element={<Preferences/>} />
       </Routes>
     </Router>
   );
 }
-
 export default App;
