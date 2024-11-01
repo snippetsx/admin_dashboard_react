@@ -1,181 +1,152 @@
 import React, { useState } from 'react';
 import { 
-  Container, 
-  TextField, 
-  Button, 
-  Typography, 
   Box,
   ListItem,
   ListItemText,
   List,
   Drawer,
   IconButton,
-  Divider
+  Divider,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Menu,
+  MenuItem,
 } from '@mui/material';
-import ListItemIcon from '@mui/icons-material/List'
-import PeopleIcon from'@mui/icons-material/People'
-import DashboardIcon from'@mui/icons-material/Dashboard'
-import BarChartIcon from'@mui/icons-material/BarChart'
-import SettingsIcon from'@mui/icons-material/Settings'
-import ChevronLeftIcon from'@mui/icons-material/ChevronLeft'
-import MenuIcon from'@mui/icons-material/Menu'
-
-import {
-    Settings,
-} from '@mui/icons-material'
+import PeopleIcon from '@mui/icons-material/PeopleOutline';
+import DashboardIcon from '@mui/icons-material/DashboardOutlined';
+import BarChartIcon from '@mui/icons-material/BarChartOutlined';
+import SettingsIcon from '@mui/icons-material/SettingsOutlined';
+import LogoutIcon from  '@mui/icons-material/LogoutOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
 
-const DashboardPageWithTheme = () => (
-  <ThemeProvider theme={theme}>
-    <DashboardPage />
-  </ThemeProvider>
-);
+const drawerWidth = 240;
 
-const DashboardPage = () => {
-const [isMenuHidden, setIsMenuHidden] = useState('');
+export default function DashboardMain() {
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
+
+  const handleDrawer = () => {
+    if(open === false){
+      setOpen(true);
+    } 
+    else{
+      setOpen(false);
+    }
+  };
+
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <>
-      <Box
-        sx={{
-          width: '100%',
-          backgroundColor: '#4e00ba',
-          color: 'white',
-          padding: 2,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="h6">
-            Admin Dashboard
-        </Typography>
-        <Button 
-          variant="contained" 
-          color="secondary"
-          onClick={() => {
-            // Здесь должна быть логика выхода
-            // navigate('/login');
-          }}
-        >
-          Выйти
-        </Button>
-      </Box>
-      <Drawer
-        variant="persistent"
-        anchor="left"
-        open={!isMenuHidden}
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: 240,
-            boxSizing: 'border-box',
-          },
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: 2,
-            justifyContent: 'space-between',
-          }}
-        >
-          <Typography variant="h6">
-            Меню
-          </Typography>
-          <IconButton onClick={() => setIsMenuHidden(true)}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Box>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Главная" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Пользователи" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Статистика" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Настройки" />
-          </ListItem>
-        </List>
-      </Drawer>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={() => setIsMenuHidden(false)}
-        edge="start"
-        sx={{ marginRight: 2, ...(isMenuHidden && { display: 'none' }) }}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h4" gutterBottom>
-            Добро пожаловать в панель администратора
-          </Typography>
-          
-          <Box sx={{ mt: 4, width: '100%' }}>
-            <Typography variant="h5" gutterBottom>
-              Быстрые действия
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, width: `calc(100% - ${open ? drawerWidth : 0}px)`, ml: `${open ? drawerWidth : 0}px` }}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawer}
+              edge="start"
+              sx={{ marginRight: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
+              Admin Dashboard
             </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-              <Button variant="outlined" sx={{ m: 1 }}>Управление пользователями</Button>
-              <Button variant="outlined" sx={{ m: 1 }}>Статистика</Button>
-              <Button variant="outlined" sx={{ m: 1 }}>Настройки системы</Button>
-            </Box>
-          </Box>
+            <IconButton
+              color="inherit"
+              onClick={handleMenuClick}
+              sx={{ transform: 'scale(1.2)' }}
+            >
+              <AccountCircleIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={openMenu}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={handleMenuClose}>
+                  <AccountCircleIcon sx={{ marginRight: 2 }} />
+                 Profile
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose}>
+                  <AccountCircleIcon sx={{ marginRight: 2 }} />
+                My account
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose}>
+                  <SettingsIcon sx={{ marginRight: 2 }} />
+                Settings
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose}>
+                  <LogoutIcon sx={{ marginRight: 2 }} />
+                Logout
+              </MenuItem>
+            </Menu>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              bgcolor: 'secondary.main',
+              boxSizing: 'border-box',
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
           
-          <Box sx={{ mt: 4, width: '100%' }}>
-            <Typography variant="h5" gutterBottom>
-              Последние действия
-            </Typography>
-            {/* Здесь можно добавить компонент для отображения последних действий */}
-          </Box>
+        >
+          <Divider />
+          <List>
+            <ListItem button key="Dashboard">
+                <DashboardIcon sx={{ marginRight: 2, color: '#FFFFFF'}}/>
+              <ListItemText primary="Dashboard" sx={{ color: '#FFFFFF' }} />
+            </ListItem>
+            <ListItem button key="Users">
+                <PeopleIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
+              <ListItemText primary="Users" sx={{ color: '#FFFFFF' }} />
+            </ListItem>
+            <ListItem button key="Reports">
+                <BarChartIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
+              <ListItemText primary="Reports" sx={{ color: '#FFFFFF' }} />
+            </ListItem>
+            <ListItem button key="Settings">
+                <SettingsIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
+              <ListItemText primary="Settings" sx={{ color: '#FFFFFF' }} />
+            </ListItem>
+            <ListItem button key="Preferences">
+                <SettingsIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
+              <ListItemText primary="Preferences" sx={{ color: '#FFFFFF' }} />
+            </ListItem>
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        >
+          <Toolbar />
+          <Typography paragraph>
+            Welcome to the Dashboard!
+          </Typography>
         </Box>
-      </Container>
-      
-      <Box sx={{ 
-        position: 'fixed', 
-        bottom: 0, 
-        left: 0, 
-        right: 0, 
-        textAlign: 'center', 
-        padding: '10px',
-        backgroundColor: 'background.paper'
-      }}>
-        <Typography variant="body2" color="text.secondary">
-          © {new Date().getFullYear()} LCSA и SnippetsX. Все права защищены.
-        </Typography>
       </Box>
-    </>
+    </ThemeProvider>
   );
-};
-
-
-
-export default DashboardPageWithTheme;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, TextField, Typography, Box } from '@mui/material';
+import { Button, Container, TextField, Typography, AppBar, Toolbar, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
 import {loginUser} from './LoginServerSend'
@@ -20,19 +20,13 @@ export default function Login({ setToken }) {
 
   return(
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          width: '100%',
-          backgroundColor: '#4e00ba',
-          color: 'white',
-          padding: 2,
-          textAlign: 'center', 
-        }}
-      >
-        <Typography variant="h6">
-          Admin Dashboard
-        </Typography>
-      </Box>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            Admin Dashboard
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Container component="main" maxWidth="xs">
         
         <Box
