@@ -122,27 +122,18 @@ export default function DashboardMain() {
         >
           <Divider />
           <List>
-            <ListItem button key="Dashboard">
+            <ListItem button key="Database Configuration">
                 <DashboardIcon sx={{ marginRight: 2, color: '#FFFFFF'}}/>
-              <ListItemText primary="Dashboard" sx={{ color: '#FFFFFF' }} />
+              <ListItemText primary="Database Configuration" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-            <ListItem button key="Users">
+            <ListItem button key="Access lists">
                 <PeopleIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-              <ListItemText primary="Users" sx={{ color: '#FFFFFF' }} />
+              <ListItemText primary="Access lists" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-            <ListItem button key="Reports">
+            <ListItem button key="Debug">
                 <BarChartIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-              <ListItemText primary="Reports" sx={{ color: '#FFFFFF' }} />
+              <ListItemText primary="Debug" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-            <ListItem button key="Server Configuration">
-                <ConstructionOutlinedIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-              <ListItemText primary="Server Configuration" sx={{ color: '#FFFFFF' }} />
-            </ListItem>
-          <ListItem button key="Terminal">
-              <TerminalOutlinedIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-            <ListItemText primary="Terminal" sx={{ color: '#FFFFFF' }} />
-          </ListItem>
-
 
           </List>
         </Drawer>
@@ -152,7 +143,7 @@ export default function DashboardMain() {
         >
           <Toolbar />
           <Typography paragraph>
-            Welcome to the Dashboard!
+            Welcome to the Settings!
           </Typography>
         </Box>
       </Box>
