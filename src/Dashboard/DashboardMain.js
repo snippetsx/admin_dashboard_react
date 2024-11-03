@@ -21,11 +21,11 @@ import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined';
 import SettingsIcon from '@mui/icons-material/SettingsOutlined';
 import TerminalOutlinedIcon from '@mui/icons-material/TerminalOutlined';
 import LogoutIcon from  '@mui/icons-material/LogoutOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
 import deleteToken from '../core/deleteToken';
+import {SystemMon, WebsiteAvailability} from '../widgets/WidgetsStatistics'
 
 const drawerWidth = 240;
 
@@ -56,17 +56,8 @@ export default function DashboardMain() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, width: `calc(100% - ${open ? drawerWidth : 0}px)`, ml: `${open ? drawerWidth : 0}px` }}>
+        <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawer}
-              edge="start"
-              sx={{ marginRight: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
               Admin Dashboard
             </Typography>
@@ -82,6 +73,10 @@ export default function DashboardMain() {
               open={openMenu}
               onClose={handleMenuClose}
             >
+              <MenuItem onClick={() => { handleMenuClose(); window.location.href = '/dashboard'; }}>
+                  <AccountCircleIcon sx={{ marginRight: 2 }} />
+                 Dashboard
+              </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                   <AccountCircleIcon sx={{ marginRight: 2 }} />
                  Profile
@@ -115,14 +110,12 @@ export default function DashboardMain() {
               boxSizing: 'border-box',
             },
           }}
-          variant="persistent"
+          variant="permanent"
           anchor="left"
-          open={open}
-          
         >
           <Divider />
           <List>
-            <ListItem button key="Dashboard">
+            <ListItem button key="Dashboard" onClick={() => window.location.href = '/dashboard'}>
                 <DashboardIcon sx={{ marginRight: 2, color: '#FFFFFF'}}/>
               <ListItemText primary="Dashboard" sx={{ color: '#FFFFFF' }} />
             </ListItem>
@@ -138,7 +131,7 @@ export default function DashboardMain() {
                 <ConstructionOutlinedIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
               <ListItemText primary="Server Configuration" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-          <ListItem button key="Terminal">
+          <ListItem button key="Terminal" onClick={() => window.location.href = '/dashboard/console'}>
               <TerminalOutlinedIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
             <ListItemText primary="Terminal" sx={{ color: '#FFFFFF' }} />
           </ListItem>
@@ -151,9 +144,10 @@ export default function DashboardMain() {
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
           <Toolbar />
-          <Typography paragraph>
-            Welcome to the Dashboard!
-          </Typography>
+          <Box sx={{ display: 'flex', gap: 3 }}>
+            <SystemMon/>
+            <WebsiteAvailability/>
+          </Box>
         </Box>
       </Box>
     </ThemeProvider>

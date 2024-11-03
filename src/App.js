@@ -5,6 +5,7 @@ import Settings from './Settings/SettingsMain'
 import Dashboard from './Dashboard/DashboardMain'
 import './App.css'
 import useToken from './core/useToken';
+import Terminal from './Terminal/TerminalPage'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         {/* <Route path="/dashboard/configuration" element={<Settings />} />
         <Route path="/dashboard/users" element={<Users />} />
         <Route path="/dashboard/reports" element={<Reports />} /> */}
+        <Route path="/dashboard/console" element={<Terminal/>} />
         <Route path="/settings" element={<Settings/>} />
       </Routes>
     </Router>
