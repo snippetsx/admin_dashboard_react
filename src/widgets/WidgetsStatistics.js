@@ -6,6 +6,7 @@ import {
 } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
+import { getSystemStats } from '../core/requestStats'
 
 export const SystemMon = () => {
   const [cpuUsage, setCpuUsage] = useState(0);
@@ -14,8 +15,16 @@ export const SystemMon = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       // Симуляция получения данных об использовании CPU и RAM
-      setCpuUsage(Math.floor(Math.random() * 100));
-      setRamUsage(Math.floor(Math.random() * 100));
+      getSystemStats()
+        .then(stats => {
+          setCpuUsage(stats.cpu);
+          setRamUsage(stats.memory);
+        })
+        .catch(error => {
+          console.error('Failed to fetch system stats:', error);
+          setCpuUsage(0);
+          setRamUsage(0);
+        });
     }, 1000);
 
     return () => clearInterval(interval);

@@ -1,6 +1,12 @@
 # Admin Dashboard writed on React
 This project is a simple admin panel designed for managing servers. \
 It utilizes Material UI for the user interface components. \
+## Screenshots
+![Image](/screenshots/screenshot1.png)
+![Image](/screenshots/screenshot2.png)
+
+
+## How to run
 To run the project, you can download/clone the repository and use these commands to run:
 ```bash 
 npm install

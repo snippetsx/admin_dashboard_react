@@ -4,18 +4,27 @@ import { Button, Container, TextField, Typography, AppBar, Toolbar, Box } from '
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
 import {loginUser} from './LoginServerSend'
+import './LoginPage.css'
+import { sha256 } from 'js-sha256';
 
 export default function Login({ setToken }) {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [msg, setMsg] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
-      username,
-      password
-    });
-    setToken(token);
+    try {
+      
+      const token = await loginUser({
+        username,
+        password
+      });
+      setToken(token);
+    } catch (error) {
+      // Add shake animation and red color to form if error
+      setMsg(true);
+    }
   }
 
   return(
@@ -63,8 +72,11 @@ export default function Login({ setToken }) {
               label="Password"
               type="password"
               id="password"
+              error={!!msg}
+              helperText={msg ? "Incorrect password" : ""}
+              className={msg ? 'shake-animation' : ''}
               autoComplete="current-password"
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => setPassword(sha256(e.target.value))}
             />
             <Button
               type="submit"

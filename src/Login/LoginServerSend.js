@@ -6,5 +6,10 @@ export async function loginUser(credentials) {
     },
     body: JSON.stringify(credentials)
   })
-    .then(data => data.json())
+    .then(response => {
+      if (response.status === 401) {
+        throw new Error('Invalid credentials');
+      }
+      return response.json();
+    })
  }

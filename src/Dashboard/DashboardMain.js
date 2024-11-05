@@ -30,19 +30,8 @@ import {SystemMon, WebsiteAvailability} from '../widgets/WidgetsStatistics'
 const drawerWidth = 240;
 
 export default function DashboardMain() {
-  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-
-  const handleDrawer = () => {
-    if(open === false){
-      setOpen(true);
-    } 
-    else{
-      setOpen(false);
-    }
-  };
-
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -144,6 +133,7 @@ export default function DashboardMain() {
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
           <Toolbar />
+          {/* <Typography variant="h4">Hi {localStorage.getItem('token')}</Typography> */}
           <Box sx={{ display: 'flex', gap: 3 }}>
             <SystemMon/>
             <WebsiteAvailability/>
