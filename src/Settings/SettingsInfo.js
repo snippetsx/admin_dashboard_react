@@ -17,22 +17,32 @@ import {
 import PeopleIcon from '@mui/icons-material/PeopleOutline';
 import DashboardIcon from '@mui/icons-material/DashboardOutlined';
 import BarChartIcon from '@mui/icons-material/BarChartOutlined';
-import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined';
 import SettingsIcon from '@mui/icons-material/SettingsOutlined';
-import TerminalOutlinedIcon from '@mui/icons-material/TerminalOutlined';
 import LogoutIcon from  '@mui/icons-material/LogoutOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
 import deleteToken from '../core/deleteToken';
-import {SystemMon, WebsiteAvailability} from '../widgets/WidgetsStatistics'
-import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import '../metadata.json'
+import { DashboardInfo } from '../widgets/WidgetStatic'
 
 const drawerWidth = 240;
 
-export default function DashboardMain() {
+export default function SettingsInfo() {
+  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
+
+  const handleDrawer = () => {
+    if(open === false){
+      setOpen(true);
+    } 
+    else{
+      setOpen(false);
+    }
+  };
+
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -64,7 +74,7 @@ export default function DashboardMain() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={() => { handleMenuClose(); window.location.href = '/dashboard'; }}>
-                  <AccountCircleIcon sx={{ marginRight: 2 }} />
+                  <DashboardIcon sx={{ marginRight: 2 }} />
                  Dashboard
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
@@ -102,30 +112,22 @@ export default function DashboardMain() {
           }}
           variant="permanent"
           anchor="left"
+          
         >
           <Divider />
           <List>
-            <ListItem button key="Dashboard" onClick={() => window.location.href = '/dashboard'}>
+            <ListItem button key="Database Configuration">
                 <DashboardIcon sx={{ marginRight: 2, color: '#FFFFFF'}}/>
-              <ListItemText primary="Dashboard" sx={{ color: '#FFFFFF' }} />
+              <ListItemText primary="Database Configuration" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-            <ListItem button key="Users">
+            <ListItem button key="Access lists">
                 <PeopleIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-              <ListItemText primary="Users" sx={{ color: '#FFFFFF' }} />
+              <ListItemText primary="Access lists" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-            <ListItem button key="Reports">
+            <ListItem button key="Debug">
                 <BarChartIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-              <ListItemText primary="Reports" sx={{ color: '#FFFFFF' }} />
+              <ListItemText primary="Debug" sx={{ color: '#FFFFFF' }} />
             </ListItem>
-            <ListItem button key="Server Configuration">
-                <ConstructionOutlinedIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-              <ListItemText primary="Server Configuration" sx={{ color: '#FFFFFF' }} />
-            </ListItem>
-          <ListItem button key="Terminal" onClick={() => window.location.href = '/dashboard/console'}>
-              <TerminalOutlinedIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
-            <ListItemText primary="Terminal" sx={{ color: '#FFFFFF' }} />
-          </ListItem>
-
 
           </List>
         </Drawer>
@@ -134,11 +136,10 @@ export default function DashboardMain() {
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
           <Toolbar />
-          {/* <Typography variant="h4">Hi {localStorage.getItem('token')}</Typography> */}
-          <Box sx={{ display: 'flex', gap: 3 }}>
-            <SystemMon/>
-            <WebsiteAvailability/>
-          </Box>
+        <Typography variant="h5" sx={{ mb: 3, color: 'primary.main' }}>
+          System Information
+        </Typography>
+        <DashboardInfo />
         </Box>
       </Box>
     </ThemeProvider>

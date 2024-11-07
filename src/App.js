@@ -1,8 +1,10 @@
 import React from 'react';
 import Login from './Login/LoginPage';
 import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
-import Settings from './Settings/SettingsMain'
+import SettingsMain from './Settings/SettingsMain'
+import SettingsInfo from './Settings/SettingsInfo'
 import Dashboard from './Dashboard/DashboardMain'
+
 import './App.css'
 import useToken from './core/useToken';
 import Terminal from './Terminal/TerminalPage'
@@ -24,7 +26,8 @@ function App() {
         <Route path="/dashboard/users" element={<Users />} />
         <Route path="/dashboard/reports" element={<Reports />} /> */}
         <Route path="/dashboard/console" element={<Terminal/>} />
-        <Route path="/settings" element={<Settings/>} />
+        <Route path="/settings" element={<SettingsMain/>} />
+        <Route path="/settings/info" element={<SettingsInfo/>} />
       </Routes>
     </Router>
   );
