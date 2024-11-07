@@ -25,6 +25,11 @@ export const DashboardInfo = () => {
         <Typography paragraph>
           Current Build: {metadata.buildMajor}.{metadata.buildMinor}.{metadata.buildRevision} {metadata.buildTag}
         </Typography>
+      {['DEV', 'ALPHA', 'BETA'].includes(metadata.buildTag) && (
+        <Typography paragraph sx={{ color: 'warning.main' }}>
+          Warning: This is a {metadata.buildTag} build. Some features may not be stable. Build may contain bugs and bumps
+        </Typography>
+      )}
       </Box>
     </ThemeProvider>
   );
