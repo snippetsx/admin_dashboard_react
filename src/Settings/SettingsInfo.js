@@ -19,7 +19,6 @@ import DashboardIcon from '@mui/icons-material/DashboardOutlined';
 import BarChartIcon from '@mui/icons-material/BarChartOutlined';
 import SettingsIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutIcon from  '@mui/icons-material/LogoutOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
@@ -30,18 +29,8 @@ import { DashboardInfo } from '../widgets/WidgetStatic'
 const drawerWidth = 240;
 
 export default function SettingsInfo() {
-  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-
-  const handleDrawer = () => {
-    if(open === false){
-      setOpen(true);
-    } 
-    else{
-      setOpen(false);
-    }
-  };
 
 
   const handleMenuClick = (event) => {
@@ -127,6 +116,10 @@ export default function SettingsInfo() {
             <ListItem button key="Debug">
                 <BarChartIcon sx={{ marginRight: 2, color: '#FFFFFF' }}/>
               <ListItemText primary="Debug" sx={{ color: '#FFFFFF' }} />
+            </ListItem>
+            <ListItem button key="Info" onClick={() => window.location.href = '/settings/info'}>
+                <DashboardIcon sx={{ marginRight: 2, color: '#FFFFFF'}}/>
+              <ListItemText primary="Info" sx={{ color: '#FFFFFF' }} />
             </ListItem>
 
           </List>

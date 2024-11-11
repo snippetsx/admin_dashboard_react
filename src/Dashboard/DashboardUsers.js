@@ -27,7 +27,6 @@ import theme from '../theme';
 import deleteToken from '../core/deleteToken';
 import {SystemMon, WebsiteAvailability} from '../widgets/WidgetsStatistics'
 
-
 const drawerWidth = 240;
 
 export default function DashboardMain() {
@@ -135,9 +134,25 @@ export default function DashboardMain() {
         >
           <Toolbar />
           {/* <Typography variant="h4">Hi {localStorage.getItem('token')}</Typography> */}
-          <Box sx={{ display: 'flex', gap: 3 }}>
+          <Box sx={{ display: 'flex', gap: 3, mb: 3 }}>
             <SystemMon/>
             <WebsiteAvailability/>
+            <SystemMon/>
+          </Box>
+          <Box sx={{ display: 'flex', gap: 3, mb: 3 }}>
+            <SystemMon/>
+            <WebsiteAvailability/>
+            <SystemMon/>
+          </Box>
+          <Box sx={{ display: 'flex', gap: 3, mb: 3 }}>
+            <SystemMon/>
+            <WebsiteAvailability/>
+            <SystemMon/>
+          </Box>
+          <Box sx={{ display: 'flex', gap: 3, mb: 3 }}>
+            <SystemMon/>
+            <WebsiteAvailability/>
+            <SystemMon/>
           </Box>
         </Box>
       </Box>

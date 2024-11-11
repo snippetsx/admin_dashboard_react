@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-do
 import SettingsMain from './Settings/SettingsMain'
 import SettingsInfo from './Settings/SettingsInfo'
 import Dashboard from './Dashboard/DashboardMain'
+import metadata from './metadata.json';
 
 import './App.css'
 import useToken from './core/useToken';
@@ -13,7 +14,7 @@ import Terminal from './Terminal/TerminalPage'
 function App() {
   const { token, setToken } = useToken();
   
-  if(!token){
+  if(!token && !(['DEV', 'ALPHA', 'BETA'].includes(metadata.buildTag))){
     return <Login setToken={setToken} />
   }
 

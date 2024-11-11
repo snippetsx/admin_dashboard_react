@@ -21,7 +21,6 @@ import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined';
 import SettingsIcon from '@mui/icons-material/SettingsOutlined';
 import TerminalOutlinedIcon from '@mui/icons-material/TerminalOutlined';
 import LogoutIcon from  '@mui/icons-material/LogoutOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
@@ -33,19 +32,8 @@ import 'xterm/css/xterm.css';
 const drawerWidth = 240;
 
 export default function TerminalPage() {
-  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-
-  const handleDrawer = () => {
-    if(open === false){
-      setOpen(true);
-    } 
-    else{
-      setOpen(false);
-    }
-  };
-
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
