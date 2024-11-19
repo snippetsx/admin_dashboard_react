@@ -1,3 +1,4 @@
+# !!!Migrated to [Selfhost Gitea Service](https://git.lcsa.ru/snippetsx/admin_dashboard_react "Selfhost Gitea Service")!!!
 # Admin Dashboard writed on React
 This project is a simple admin panel designed for managing servers. \
 It utilizes Material UI for the user interface components. \
